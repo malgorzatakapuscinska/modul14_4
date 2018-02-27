@@ -1,0 +1,48 @@
+{
+  "name": "modul14_4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test:html && npm run test:js",
+    "start": "nodemon index.js",
+    "test:html": "glob-run nu-html-checker *.html",
+    "test:js": "jshint js",
+    "init-project": " npm run init:npm-install && npm run init:dirs && npm run init:files && npm run init:gitignore",
+    "init:dirs": "mkdirp sass css vendor images js",
+    "init:files": "touch README.md index.html sass/style.scss js/scripts.js",
+    "init:gitignore": "curl https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore -o .gitignore",
+    "init:npm-install": "npm install",
+    "build": "npm run build:clean && npm run build:sass && npm run build:autoprefixer && npm run test",
+    "build:sass": "node-sass --output-style compact -o css sass",
+    "build:sass:dev": "node-sass --output-style expanded source-map true -o css sassOB",
+    "build:autoprefixer": "autoprefixer-cli css/style.css",
+    "build:clean": "node_modules/.bin/rimraf css/*.css",
+    "watch": "parallelshell \"npm run watch:sass\" \"npm run watch:autoprefixer\" \"npm run watch:browser-sync\" ",
+    "watch:sass": "node-sass --output-style expanded --source-map true sass/style.scss css/style.css --watch",
+    "watch:autoprefixer": "onchange -d 100 css/style.css -- autoprefixer-cli -o css/style.prefixed.css css/style.css",
+    "watch:browser-sync": "node_modules/.bin/browser-sync start --server --files \"css/*.css,index.html, js/*.js\" --browser \"chrome\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/malgorzatakapuscinska/modul13_5.git"
+  },
+  "keywords": [],
+  "author": "m_kapuscinska",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/malgorzatakapuscinska/modul13_5/issues"
+  },
+  "homepage": "https://github.com/malgorzatakapuscinska/modul13_5#readme",
+  "dependencies": {
+    "browser-sync": "^2.23.6",
+    "autoprefixer-cli": "^1.0.0",
+    "jshint": "^2.9.5",
+    "mkdirp": "^0.5.1",
+    "node-sass": "^4.7.2",
+    "nu-html-checker": "^0.1.0",
+    "onchange": "^3.3.0",
+    "parallelshell": "^3.0.2",
+    "rimraf": "^2.6.2"
+  }
+}
