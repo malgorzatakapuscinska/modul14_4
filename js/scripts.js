@@ -32,70 +32,115 @@ var movies = [
 	
 ];
 
-var card = movies.map(function(movie){
-	return React.createElement('div', {className: 'card'},
-			
-				// card-left
-			
-				React.createElement('div', {className: 'card_left'},
-					
-					// image
-					
-					React.createElement('img', {src: movie.imgSrc})
-				),
-				
-				// card-right
-				
-				React.createElement('div', {className: 'card_right'},
-					
-					// title
-						
-					React.createElement('h2', {}, movie.title),
-					
-					// details
-					
-					React.createElement('div', {className: 'card_right_details'},
-			
-						React.createElement('ul',{},
-							React.createElement('li', {}, movie.prodDate),
-							React.createElement('li', {}, movie.length),
-							React.createElement('li', {}, movie.kindOf)
-						)
-					
-					),
-					
-					// description
-					
-					React.createElement('div', {className: 'card_right_review'},
-						React.createElement('p', {}, movie.desc)
-					),
-					
-					// buton 'Watch triler'
-					
-					React.createElement('div', {className: 'card_right_button'},
-							React.createElement('a', {href: movie.video, target: '_blank'}, 'Watch triler' )
-						)
+var Movie = React.createClass({
+	propTypes: {
+		movie: React.PropTypes.object.isRequired,
+	},
+	render: function(){
+		return (
+				React.createElement('div', {key: this.props.movie.id, className: 'card'},	
+					React.createElement(CardLeft, {image: this.props.movie.imgSrc}),
+					React.createElement(CardRight, {}, )
 				)
+		)
+	}
+});
+		
+var CardLeft = React.createClass({
+	propTypes: {
+		imgSrc: React.propTypes.string.isRequired,
+	},
+	render: function(){
+		return (
+			React.createElement('div', {className: 'card_left'},
+				React.createElement('img', {src: this.props.movie.imgSrc})
 			)
+		)
+	}
 });
 
-/*var moviesElements = movies.map(function(movie){
-	return 	React.createElement('li', {key: movie.id},
-			React.createElement('h2', {}, movie.title),
-			React.createElement('p', {}, movie.desc),
-			React.createElement('img', {src: movie.imgSrc})
-		);
 
-});*/
+var CardRight = React.createClass({
+	propTypes: {
+		movie: React.propTypes.object.isRequired,
+	},
+	render: function(){
+		return (
+				React.createElement('div', {className: 'card_right'},
+					React.createElement(MovieTitle, {}, this.props.movie.title),
+					React.createElement(MovieDetails, {}, this.props.movie),
+					React.createElement(MovieDescription, {}, this.props.movie.desc),
+					React.createElement(MovieButton, {}, this.props.movie.video),
+				)
+		)
+	}
+});
 
+// TITLE
+
+var MovieTitle = React.createClass({
+	propTypes: {
+		title: React.propTypes.string.isRequired, 
+	},
+	render: function() {
+		return (React.createElement('h2', {}, this.props.title)
+		)
+	}
+});
+
+// DETAILS
+
+var MovieDetails = React.createClass({
+	propTypes: {
+		movie: React.propTypes.object.isRequired,
+	},
+	render: function(){
+		return Reaact.createElement('ul', {}, 
+				React.createElement('li', {}, this.props.movie.prodDate),
+				React.createElement('li', {}, this.props.movie.length),
+				React.createElement('li', {}, this.props.movie.kindOf)	
+		)
+	}
+});
+
+// DESCRIPTION
+
+var MovieDescription = React.createClass({
+	propTypes: {
+		desc: Reaact.propTypes.string.isRequired,
+	},
+	render: function(){
+		return (
+			React.createElement('div', {className: 'card_right_review'},
+					React.createElement('p', {}, this.props.movie.desc)
+			)
+		)
+	}
+});
+
+// BUTTON
+
+var MovieButton = React.createClass({
+	propTypes: {
+		video: React.propTypes.string.idRequired,
+	},
+	render: function(){
+		React.createElement('div', {className: 'card_right_button'},
+				React.createElement('a', {href: his.props.movie.video, target: '_blank'}, 'Watch triler' )
+		)
+	}
+});
 
 var element = React.createElement('section', {},
 		React.createElement('div', {className: 'container'},
-		React.createElement('h1', {}, 'My favorite Films:'), card
+		React.createElement('h1', {}, 'My favorite Films:'), 
+		card
 	)
 );
+		
+var Card = movies.map(function(movie) {
+        return React.createElement(Movie, {key: movie.id, movie: movie})
 
-
-
+});
 
 ReactDOM.render(element, document.getElementById('app'));

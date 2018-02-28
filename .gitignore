@@ -59,3 +59,18 @@ typings/
 
 # next.js build output
 .next
+
+#files
+css/style.css.map
+css/style.prefixed.css
+css/style.prefixed.css.map
+modulecontent.js
+
+#directories
+sass
+
+.settings
+
+#eclipse files
+
+.project
