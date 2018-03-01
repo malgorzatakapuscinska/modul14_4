@@ -27,7 +27,7 @@ var movies = [
 		kindOf: 'Phantasy, Action',
 		desc: 'The first supernatural Ghost Rider is stunt motorcyclist Johnny Blaze, who, in order to save the life of his father, agreed to give his soul to "Satan" (later revealed to be an arch-demon named Mephisto). At night and when around evil, Blaze finds his flesh consumed by hellfire, causing his head to become a flaming skull. He rides a fiery motorcycle and wields blasts of hellfire from his body, usually from his skeletal hands.',
 		imgSrc: 'images/3.jpg',
-		videoSrc: 'https://youtu.be/8M0lLJfNPds'
+		video: 'https://youtu.be/8M0lLJfNPds'
 	}
 	
 ];
@@ -40,7 +40,7 @@ var MovieTitle = React.createClass({
 	},
 	render: function() {
 		return (React.createElement('h2', {}, this.props.title)
-		)
+		);
 	}
 });
 
@@ -59,7 +59,7 @@ var MovieDetails = React.createClass({
 					React.createElement('li', {}, this.props.movie.kindOf)	
 				)
 			)
-		)	
+		);	
 	}
 });
 
@@ -74,7 +74,7 @@ var MovieDescription = React.createClass({
 			React.createElement('div', {className: 'card_right_review'},
 					React.createElement('p', {}, this.props.desc)
 			)
-		)
+		);
 	}
 });
 
@@ -82,14 +82,14 @@ var MovieDescription = React.createClass({
 
 var MovieButton = React.createClass({
 	propTypes: {
-		video: React.PropTypes.string.idRequired,
+		link: React.PropTypes.string.isRequired,
 	},
 	render: function(){
-    return (
-		React.createElement('div', {className: 'card_right_button'},
-				React.createElement('a', {href: this.props.videoSrc, target: '_blank'}, 'Watch triler' )
-		)
-   )
+		return (
+			React.createElement('div', {className: 'card_right_button'},
+					React.createElement('a', {href: this.props.video, target: '_blank'}, 'Watch triler' )
+			)
+		);
 	}
 });
 
@@ -104,7 +104,7 @@ var CardLeft = React.createClass({
 			React.createElement('div', {className: 'card_left'},
 				React.createElement('img', {src: this.props.image})
 			)
-		)
+		);
 	}
 });
 
@@ -120,9 +120,9 @@ var CardRight = React.createClass({
 					React.createElement(MovieTitle, { title: this.props.movie.title}),
 					React.createElement(MovieDetails, { movie: this.props.movie}),
 					React.createElement(MovieDescription, { desc: this.props.movie.desc }),
-					React.createElement(MovieButton, { video: this.props.movie.video})
+					React.createElement(MovieButton, { link: this.props.movie.video})
 				)
-		)
+		);
 	}
 });
 
@@ -138,13 +138,13 @@ var Movie = React.createClass({
 					React.createElement(CardLeft, {image: this.props.movie.imgSrc}, ''),
 					React.createElement(CardRight, { movie: this.props.movie }, '')
 				)
-		)
+		);
 	}
 });
 
 
 var Cards = movies.map(function(movie) {
-        return React.createElement(Movie, {key: movie.id, movie: movie})
+        return React.createElement(Movie, {key: movie.id, movie: movie});
 
 });
 
